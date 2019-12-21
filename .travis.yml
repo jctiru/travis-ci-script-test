@@ -1,0 +1,8 @@
+deploy:
+  env:
+    -secure: "$SECRET_ENV"
+  skip_cleanup: true
+  provider: script
+  script: bash script.sh
+  on:
+    branch: master
