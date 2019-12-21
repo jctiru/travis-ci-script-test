@@ -1,3 +1,4 @@
+language: generic
 deploy:
   env:
     -secure: "$SECRET_ENV"
