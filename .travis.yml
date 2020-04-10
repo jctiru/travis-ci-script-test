@@ -14,3 +14,8 @@ notifications:
     on_start: never
     on_cancel: never
     on_error: never
+  email:
+    recipients:
+      - ${EMAIL}
+    on_success: always
+    on_failure: never
