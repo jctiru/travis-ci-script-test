@@ -5,3 +5,12 @@ deploy:
   script: bash script.sh
   on:
     branch: master
+notifications:
+  webhooks:
+    urls:
+      - https://gitlab.com/api/v4/projects/${GITLAB_PROJECT_ID}/ref/${REF_NAME}/trigger/pipeline?token=${GITLAB_TRIGGER_TOKEN}
+    on_success: always
+    on_failure: never
+    on_start: never
+    on_cancel: never
+    on_error: never
