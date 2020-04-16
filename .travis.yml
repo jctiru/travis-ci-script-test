@@ -13,4 +13,5 @@ script:
   - echo $COMMIT_TIME
 
 after_success:
-  - curl --silent --output /dev/null  --request POST https://gitlab.com/api/v4/projects/$GITLAB_PROJECT_ID/ref/$REF_NAME/trigger/pipeline?token=$GITLAB_TRIGGER_TOKEN
+  - COMMIT_TIME=$(git show -s --format=%ct $TRAVIS_COMMIT)
+  - curl --silent --output /dev/null  --request POST --form token=$GITLAB_TRIGGER_TOKEN --form ref=$REF_NAME --form "variables[TRAVIS_API_TRIGGER]=true" --form "variables[TRAVIS_REPO_SLUG]=$TRAVIS_REPO_SLUG" --form "variables[CI_COMMIT_SHA]=$TRAVIS_COMMIT" --form "variables[CI_COMMIT_MESSAGE]=$TRAVIS_COMMIT_MESSAGE" --form "variables[COMMIT_TIME]=$COMMIT_TIME" https://gitlab.com/api/v4/projects/$GITLAB_PROJECT_ID/trigger/pipeline
